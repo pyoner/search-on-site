@@ -1,5 +1,6 @@
 
 function injectSearchForm(tab) {
+    if (tab.url.indexOf("http") == -1){return}
     var details = {
         file: "search.js"
     }
