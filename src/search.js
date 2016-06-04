@@ -1,4 +1,5 @@
 var site_url = "https://pyoner.github.io/search-on-site/";
+var site_origin = "https://pyoner.github.io";
 var id = "search-on-site";
 
 function injectIframe(id, url) {
@@ -23,9 +24,18 @@ function injectIframe(id, url) {
     document.body.appendChild(iframe);
 }
 
+function onMessage(event) {
+    if (event.origin != site_origin) {
+        return;
+    }
+    var f = document.getElementById(id);
+    f.style.height = event.data.height;
+}
+
 var f = document.getElementById(id);
 if (f){
     f.style.display = "none" == f.style.display ? "block" : "none";
 } else {
     injectIframe(id, site_url);
+    window.addEventListener("message", onMessage);
 }
