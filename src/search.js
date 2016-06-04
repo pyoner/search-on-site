@@ -1,4 +1,4 @@
-var site_url = "https://pyoner.github.io/search-preview/";
+var site_url = "https://pyoner.github.io/search-on-site/";
 var id = "search-on-site";
 
 function injectIframe(id, url) {
