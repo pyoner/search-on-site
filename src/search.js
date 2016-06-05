@@ -8,11 +8,13 @@ function injectIframe(id, url) {
     iframe.src = url + "?as_sitesearch=" + encodeURIComponent(document.domain);
     iframe.setAttribute("scrolling", "no");
     iframe.setAttribute("frameborder", "0");
-    iframe.setAttribute("width", "100%");
 
     var style = {
         position: "fixed",
         top: 0,
+        right: 0,
+        left: 0,
+        width: "100%",
         zIndex: 9999999,
         boxShadow: "0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2)"
     }
