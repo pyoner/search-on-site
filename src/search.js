@@ -34,9 +34,11 @@ function onMessage(event) {
     if (event.data.height > window.innerHeight) {
         f.style.height = "100%";
         message = "showScrollbar";
+        document.body.style.overflow = "hidden";
     } else {
         f.style.height = event.data.height + "px";
         message = "hideScrollbar";
+        document.body.style.overflow = "auto";
     }
     event.source.postMessage(message, event.origin);
 }
