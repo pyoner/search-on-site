@@ -15,6 +15,20 @@ function resize() {
     window.requestAnimationFrame(resize);
 }
 
+function onMessage(event) {
+    switch (event.data) {
+        case "showScrollbar":
+            document.body.style.overflow = "auto";
+        break;
+
+        case "hideScrollbar":
+            document.body.style.overflow = "hidden";
+        break;
+    }
+}
+
 if (parent) {
+    document.body.style.overflow = "hidden";
     window.requestAnimationFrame(resize);
+    window.addEventListener("message", onMessage);
 }

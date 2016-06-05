@@ -6,7 +6,6 @@ function injectIframe(id, url) {
     var iframe = document.createElement("iframe");
     iframe.id = id;
     iframe.src = url + "?as_sitesearch=" + encodeURIComponent(document.domain);
-    iframe.setAttribute("scrolling", "no");
     iframe.setAttribute("frameborder", "0");
 
     var style = {
@@ -31,7 +30,15 @@ function onMessage(event) {
         return;
     }
     var f = document.getElementById(id);
-    f.style.height = event.data.height > window.innerHeight ? "100%" : event.data.height + "px";
+    var message = "";
+    if (event.data.height > window.innerHeight) {
+        f.style.height = "100%";
+        message = "showScrollbar";
+    } else {
+        f.style.height = event.data.height + "px";
+        message = "hideScrollbar";
+    }
+    event.source.postMessage(message, event.origin);
 }
 
 var f = document.getElementById(id);
