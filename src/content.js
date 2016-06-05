@@ -1,14 +1,18 @@
+var lastHeight, lastWidth;
 function resize() {
-    window.requestAnimationFrame(resize);
     var height = Math.max(document.body.offsetHeight, 40);
     var width = document.body.offsetWidth;
 
-    if (height <= 0) {return}
-    var message = {
-        height: height + "px",
-        width: width + "px"
+    if (height != lastHeight || width != lastWidth) {
+        lastHeight = height;
+        lastWidth = width;
+        var message = {
+            height: height, 
+            width: width
+        }
+        parent.postMessage(message, "*");
     }
-    parent.postMessage(message, "*");
+    window.requestAnimationFrame(resize);
 }
 
 if (parent) {
