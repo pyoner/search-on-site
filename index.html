@@ -7,6 +7,13 @@
             body {
                 background-color: #fff;
             }
+            .s-box {
+                position:fixed;
+                top: 0;
+            }
+            .s-results {
+                margin-top: 20px;
+            }
         </style>
     </head>
     <body>
@@ -21,6 +28,8 @@
             s.parentNode.insertBefore(gcse, s);
         })();
         </script>
-        <gcse:search></gcse:search>
+        
+        <div class="s-box"><div class="gcse-searchbox"></div></div>
+        <div class="s-results"><div class="gcse-searchresults"></div></div>
     </body>
 </html>
