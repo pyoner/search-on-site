@@ -45,7 +45,12 @@ function onMessage(event) {
 
 var f = document.getElementById(id);
 if (f){
-    f.style.display = "none" == f.style.display ? "block" : "none";
+    if ("none" == f.style.display) {
+        f.style.display = "block";
+    } else {
+        f.style.display = "none";
+        document.body.style.overflow = "auto";
+    }
 } else {
     injectIframe(id, site_url);
     window.addEventListener("message", onMessage);
