@@ -31,7 +31,7 @@ function onMessage(event) {
         return;
     }
     var f = document.getElementById(id);
-    f.style.height = event.data.height;
+    f.style.height = event.data.height > window.innerHeight ? "100%" : event.data.height + "px";
 }
 
 var f = document.getElementById(id);
