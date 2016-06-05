@@ -1,6 +1,6 @@
 function resize() {
     window.requestAnimationFrame(resize);
-    var height = document.body.offsetHeight;
+    var height = Math.max(document.body.offsetHeight, 40);
     var width = document.body.offsetWidth;
 
     if (height <= 0) {return}
