@@ -21,8 +21,39 @@
         </style>
     </head>
     <body>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.18.1/URI.min.js"></script>
         <script>
         (function() {
+            function initSearch() {
+                var url = new URI();
+                var q = url.query(true) || {};
+
+                google.search.cse.element.render({
+                    div: 'searchbox',
+                    tag: 'searchbox',
+                    attributes: {
+                        as_sitesearch: q['as_sitesearch'] 
+                    }
+                }, {
+                    div: 'searchresults',
+                    tag: 'searchresults',
+                    attributes: {
+                        linkTarget: q['linkTarget'] || '_blank'
+                    }
+                });
+            }
+            function init() {
+                if (document.readyState == "complete") {
+                    initSearch();
+                } else {
+                    google.setOnLoadCallback(initSearch);
+                }
+            }
+            window.__gcse = {
+                parsetags: 'explicit',
+                callback: init
+            };
+
             var cx = '010757224930445905488:hydkhs9fcca';
             var gcse = document.createElement('script');
             gcse.type = 'text/javascript';
@@ -33,9 +64,9 @@
         })();
         </script>
         
-        <div class="s-box"><div class="gcse-searchbox"></div></div>
+        <div class="s-box"><div id="searchbox"></div></div>
         <div class="s-results">
-            <div class="gcse-searchresults" data-linkTarget="_top"></div>
+            <div id="searchresults"></div>
         </div>
     </body>
 </html>
