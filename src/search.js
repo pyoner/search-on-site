@@ -47,6 +47,7 @@ var f = document.getElementById(id);
 if (f){
     if ("none" == f.style.display) {
         f.style.display = "block";
+        f.contentWindow.postMessage("focus", site_origin);
     } else {
         f.style.display = "none";
         document.body.style.overflow = "auto";

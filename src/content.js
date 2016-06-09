@@ -24,6 +24,11 @@ function onMessage(event) {
         case "hideScrollbar":
             document.body.style.overflow = "hidden";
         break;
+
+        case "focus":
+            var input = document.body.querySelector('input[type="text"]');
+            if (input) {input.focus();}
+        break;
     }
 }
 
