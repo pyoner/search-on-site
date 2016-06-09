@@ -41,6 +41,9 @@
                         linkTarget: q['linkTarget'] || '_blank'
                     }
                 });
+                
+                var input = document.body.querySelector('input[type="text"]');
+                if (input) {input.focus()}
             }
             function init() {
                 if (document.readyState == "complete") {
