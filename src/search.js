@@ -15,7 +15,7 @@ function injectIframe(id, url) {
         right: 0,
         left: 0,
         width: "100%",
-        zIndex: 9999999,
+        zIndex: 2147483647,
         boxShadow: "0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2)"
     }
 
