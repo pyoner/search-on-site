@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
-    "version": "0.1.1",
+    "version": "0.1.2",
     "name": "Search On Site",
-    "description": "Extension allows do search on specific site",
+    "description": "Extension allows do search on a specific site",
     "icons": {
         "16": "icon128.png",
         "48": "icon128.png",
