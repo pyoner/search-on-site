@@ -24,16 +24,20 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.18.1/URI.min.js"></script>
         <script>
         (function() {
+            var url = new URI();
+            var q = url.query(true) || {};
+
             function initSearch() {
-                var url = new URI();
-                var q = url.query(true) || {};
+                var attrs = {};
+
+                if (!q.site_url && q.as_sitesearch) {
+                    attrs.as_sitesearch = q.as_sitesearch;
+                }
 
                 google.search.cse.element.render({
                     div: 'searchbox',
                     tag: 'searchbox',
-                    attributes: {
-                        as_sitesearch: q['as_sitesearch'] 
-                    }
+                    attributes: attrs 
                 }, {
                     div: 'searchresults',
                     tag: 'searchresults',
@@ -61,7 +65,15 @@
             var gcse = document.createElement('script');
             gcse.type = 'text/javascript';
             gcse.async = true;
-            gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+
+            if (q.site_url) {
+                cref =
+                    'https://script.google.com/macros/s/AKfycbyQ4EAcyF2gYZUNIc4TAbNRc2bfXwHRdkMhsxM4vX36_jeuPbR4/exec?url='
+                    + encodeURIComponent(q.site_url);
+                gcse.src = 'https://cse.google.com/cse.js?cref=' + cref;
+            } else {
+                gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+            }
             var s = document.getElementsByTagName('script')[0];
             s.parentNode.insertBefore(gcse, s);
         })();
