@@ -5,7 +5,7 @@ var id = "search-on-site";
 function injectIframe(id, url) {
     var iframe = document.createElement("iframe");
     iframe.id = id;
-    iframe.src = url + "?site_url=" + encodeURIComponent(document.URL)
+    iframe.src = url + "?as_sitesearch=" + encodeURIComponent(document.domain)
                 + "&linkTarget=_top";
     iframe.setAttribute("frameborder", "0");
 
