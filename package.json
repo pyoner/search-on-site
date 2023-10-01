@@ -1,0 +1,16 @@
+{
+  "name": "search-on-site",
+  "module": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "build": "bun build src/ --outdir .",
+    "watch": "bun build src/ --outdir . --watch"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.246",
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
