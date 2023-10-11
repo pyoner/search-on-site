@@ -21,6 +21,6 @@
   },
   "permissions": ["tabs", "search"],
   "omnibox": {
-    "keyword": "on"
+    "keyword": "son"
   }
 }
