@@ -3,8 +3,10 @@
   "module": "src/index.ts",
   "type": "module",
   "scripts": {
-    "build": "bun build src/ --outdir .",
-    "watch": "bun build src/ --outdir . --watch"
+    "clean": "rm -fr dist/",
+    "copy": "mkdir -p dist/ && find src -type f ! -name '*.ts' -exec cp --parents '{}' dist/ ';'",
+    "build": "bun run copy && bun build src/ --outdir dist/",
+    "watch": "bun build src/ --outdir dist/ --watch"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.246",
