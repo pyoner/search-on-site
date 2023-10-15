@@ -16,21 +16,24 @@ const search = async (text: string) => {
   const url = new URL(tab.url);
 
   await chrome.search.query({
-    text: `site:${url.hostname} ${text}`,
+    text: `site:${url.hostname} ${text.trim()}`,
     disposition: "CURRENT_TAB",
   });
 };
 
-// init
+// Add a listener to create the initial context menu items,
+// context menu items only need to be created at runtime.onInstalled
+chrome.runtime.onInstalled.addListener(async () => {
+  // Create a context menu item
+  chrome.contextMenus.create({
+    id: "son",
+    title: "Search On Site",
+    contexts: ["all"],
+  });
+});
+
 chrome.omnibox.setDefaultSuggestion({ description: "Search On Site" });
 chrome.omnibox.onInputEntered.addListener(search);
-
-// Create a context menu item
-chrome.contextMenus.create({
-  id: "son",
-  title: "Search On Site",
-  contexts: ["all"],
-});
 
 // Add a click event listener
 chrome.contextMenus.onClicked.addListener(function (info, tab) {
