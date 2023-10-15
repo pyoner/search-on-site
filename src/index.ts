@@ -1,3 +1,4 @@
+const CONTEXT_MENU_ID = "son";
 const search = async (text: string) => {
   const tabs = await chrome.tabs.query({
     active: true,
@@ -26,7 +27,7 @@ const search = async (text: string) => {
 chrome.runtime.onInstalled.addListener(async () => {
   // Create a context menu item
   chrome.contextMenus.create({
-    id: "son",
+    id: CONTEXT_MENU_ID,
     title: "Search On Site",
     contexts: ["all"],
   });
@@ -37,7 +38,7 @@ chrome.omnibox.onInputEntered.addListener(search);
 
 // Add a click event listener
 chrome.contextMenus.onClicked.addListener(function (info, tab) {
-  if (info.menuItemId === "son" && info.selectionText) {
+  if (info.menuItemId === CONTEXT_MENU_ID && info.selectionText) {
     // Perform your action here
     search(info.selectionText);
   }
