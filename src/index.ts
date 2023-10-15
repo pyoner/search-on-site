@@ -1,5 +1,8 @@
 const CONTEXT_MENU_ID = "son";
-const search = async (text: string) => {
+const search = async (
+  text: string,
+  disposition: chrome.search.Disposition = "CURRENT_TAB"
+) => {
   const tabs = await chrome.tabs.query({
     active: true,
     currentWindow: true,
@@ -18,7 +21,7 @@ const search = async (text: string) => {
 
   await chrome.search.query({
     text: `site:${url.hostname} ${text.trim()}`,
-    disposition: "CURRENT_TAB",
+    disposition,
   });
 };
 
@@ -34,12 +37,14 @@ chrome.runtime.onInstalled.addListener(async () => {
 });
 
 chrome.omnibox.setDefaultSuggestion({ description: "Search On Site" });
-chrome.omnibox.onInputEntered.addListener(search);
+chrome.omnibox.onInputEntered.addListener((text, disposition) =>
+  search(text, disposition == "currentTab" ? "CURRENT_TAB" : "NEW_TAB")
+);
 
 // Add a click event listener
-chrome.contextMenus.onClicked.addListener(function (info, tab) {
+chrome.contextMenus.onClicked.addListener(async function (info, tab) {
   if (info.menuItemId === CONTEXT_MENU_ID && info.selectionText) {
     // Perform your action here
-    search(info.selectionText);
+    await search(info.selectionText, "NEW_TAB");
   }
 });
