@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "version": "0.3.0",
+  "version": "0.3.1",
   "name": "Search On Site",
   "description": "Extension allows do search on a specific site",
   "icons": {
@@ -19,8 +19,8 @@
     },
     "default_title": "Click to Search On Site"
   },
-  "permissions": ["tabs", "search"],
+  "permissions": ["tabs", "search", "contextMenus"],
   "omnibox": {
-    "keyword": "on"
+    "keyword": "son"
   }
 }

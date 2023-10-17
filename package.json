@@ -3,8 +3,11 @@
   "module": "src/index.ts",
   "type": "module",
   "scripts": {
-    "build": "bun build src/ --outdir .",
-    "watch": "bun build src/ --outdir . --watch"
+    "clean": "rm -fr dist/",
+    "copy": "mkdir -p dist/ && find src -type f ! -name '*.ts' -exec cp --parents '{}' dist/ ';'",
+    "build": "bun run clean && bun run copy && bun build src/ --outdir dist/",
+    "watch": "bun build src/ --outdir dist/ --watch",
+    "dist": "bun run build && zip -j -r dist/src.zip dist/src"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.246",
@@ -12,5 +15,8 @@
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "typechat": "^0.0.10"
   }
 }
