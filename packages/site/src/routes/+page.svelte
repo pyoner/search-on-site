@@ -1,7 +1,4 @@
 <script lang="ts">
-  function focus(){
-
-  }
   function search(query: string){
     parent.postMessage({search: {
       query
