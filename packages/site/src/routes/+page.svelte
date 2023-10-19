@@ -1,2 +1,10 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+  function search(query: string){
+    parent.postMessage({search: {
+      query
+    }}, "*")
+  }
+  let query = ''
+</script>
+<h1>Search On Site</h1>
+<p><input type="text" bind:value={query}><button on:click={()=>search(query)}>search</button></p>
