@@ -17,7 +17,8 @@
       "19": "icon128.png",
       "38": "icon128.png"
     },
-    "default_title": "Click to Search On Site"
+    "default_title": "Click to Search On Site",
+    "default_popup": "popup.html"
   },
   "permissions": ["tabs", "search", "contextMenus"],
   "omnibox": {
