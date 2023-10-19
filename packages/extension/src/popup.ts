@@ -1,4 +1,6 @@
 /// <reference lib="dom" />
+import { search } from "./helpers";
+
 window.addEventListener("message", (event) => {
-  chrome.search.query({ text: event.data?.search?.query });
+  search(event.data?.search?.query);
 });

@@ -1,29 +1,6 @@
+import { search } from "./helpers";
+
 const CONTEXT_MENU_ID = "son";
-const search = async (
-  text: string,
-  disposition: chrome.search.Disposition = "CURRENT_TAB"
-) => {
-  const tabs = await chrome.tabs.query({
-    active: true,
-    currentWindow: true,
-  });
-
-  const tab = tabs[0];
-  if (!tab) {
-    return;
-  }
-
-  if (!tab.url) {
-    return;
-  }
-
-  const url = new URL(tab.url);
-
-  await chrome.search.query({
-    text: `site:${url.hostname} ${text.trim()}`,
-    disposition,
-  });
-};
 
 // Add a listener to create the initial context menu items,
 // context menu items only need to be created at runtime.onInstalled
