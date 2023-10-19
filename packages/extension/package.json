@@ -1,0 +1,22 @@
+{
+  "name": "search-on-site",
+  "module": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "clean": "rm -fr dist/",
+    "copy": "mkdir -p dist/ && find src -type f ! -name '*.ts' -exec cp --parents '{}' dist/ ';'",
+    "build": "bun run clean && bun run copy && bun build src/**.ts --outdir dist/src/",
+    "watch": "bun build src/ --outdir dist/ --watch",
+    "dist": "bun run build && zip -j -r dist/src.zip dist/src"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.246",
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "typechat": "^0.0.10"
+  }
+}
