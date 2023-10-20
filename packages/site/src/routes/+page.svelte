@@ -16,8 +16,11 @@
 
   let query = ''
 </script>
-<h1>Search On Site</h1>
-<form on:submit|preventDefault={handleSearch}>
-  <input type="text" use:focus bind:value={query} >
-  <button type="submit" on:click={handleSearch}>search</button>
-</form>
+
+<div class="container mx-auto px-4 prose">
+  <h3>Search On Site</h3>
+  <form on:submit|preventDefault={handleSearch}>
+    <input class="input input-bordered w-full max-w-xs" type="text" use:focus bind:value={query} >
+    <button class="btn" type="submit" on:click={handleSearch}>search</button>
+  </form>
+</div>
