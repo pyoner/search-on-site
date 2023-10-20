@@ -33,7 +33,7 @@
 					use:focus
 					bind:value={query}
 				/>
-				<button class="btn btn-primary join-item" type="submit" on:click={handleSearch}
+				<button class="btn btn-primary join-item" type="submit"
 					><svg
 						xmlns="http://www.w3.org/2000/svg"
 						fill="none"
