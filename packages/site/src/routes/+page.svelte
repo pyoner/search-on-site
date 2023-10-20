@@ -27,7 +27,7 @@
 			<h1 class="text-3xl font-bold">Search On Site</h1>
 			<form on:submit|preventDefault={handleSearch} class="join py-6">
 				<input
-					class="input input-bordered w-full max-w-xs join-item form-control"
+					class="input w-full max-w-xs join-item form-control"
 					placeholder="Quick search..."
 					type="text"
 					use:focus
