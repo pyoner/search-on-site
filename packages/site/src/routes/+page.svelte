@@ -28,7 +28,7 @@
 			<form on:submit|preventDefault={handleSearch} class="join py-6">
 				<input
 					class="input input-bordered w-full max-w-xs join-item form-control"
-					placeholder="Enter your query"
+					placeholder="Quick search..."
 					type="text"
 					use:focus
 					bind:value={query}
