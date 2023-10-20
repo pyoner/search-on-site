@@ -40,7 +40,7 @@ chrome.action.onClicked.addListener(async () => {
   let top = (screenHeight - popupHeight) / 2;
 
   // Create the popup window
-  chrome.windows.create({
+  await chrome.windows.create({
     url: "popup.html",
     type: "popup",
     left: Math.round(left),
