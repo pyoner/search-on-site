@@ -2,6 +2,7 @@
 import { search } from "./helpers";
 
 window.addEventListener("message", async (event) => {
+  console.log("message", event);
   const site = new URL(document.URL).searchParams.get("site");
   if (!site) {
     return;
