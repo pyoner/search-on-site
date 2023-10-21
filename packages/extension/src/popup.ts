@@ -20,6 +20,8 @@ window.addEventListener("message", async (event) => {
   window.close();
 });
 
-chrome.windows.onFocusChanged.addListener(() => {
-  window.close();
-});
+setTimeout(() => {
+  chrome.windows.onFocusChanged.addListener(() => {
+    window.close();
+  });
+}, 0);
