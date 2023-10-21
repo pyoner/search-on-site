@@ -19,3 +19,7 @@ window.addEventListener("message", async (event) => {
   await search(event.data?.search?.query, { site }, "NEW_TAB");
   window.close();
 });
+
+chrome.windows.onFocusChanged.addListener(() => {
+  window.close();
+});
