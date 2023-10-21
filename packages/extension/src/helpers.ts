@@ -1,25 +1,39 @@
+export type SEOperators = {
+  site: string;
+};
+
+export const joinSEOperators = (operators: SEOperators) =>
+  Object.entries(operators).reduce(
+    (acc, [k, v]) => (v ? `${acc} ${k}:${v}`.trim() : acc),
+    ""
+  );
+
 export const search = async (
   text: string,
+  operators: SEOperators,
   disposition: chrome.search.Disposition = "CURRENT_TAB"
 ) => {
+  const prefix = joinSEOperators(operators);
+  if (!prefix) {
+    return;
+  }
+
+  await chrome.search.query({
+    text: `${prefix} ${text.trim()}`,
+    disposition,
+  });
+};
+
+export const getActiveTabURL = async () => {
   const tabs = await chrome.tabs.query({
     active: true,
     currentWindow: true,
   });
 
   const tab = tabs[0];
-  if (!tab) {
+  if (!tab?.url) {
     return;
   }
 
-  if (!tab.url) {
-    return;
-  }
-
-  const url = new URL(tab.url);
-
-  await chrome.search.query({
-    text: `site:${url.hostname} ${text.trim()}`,
-    disposition,
-  });
+  return new URL(tab.url);
 };
