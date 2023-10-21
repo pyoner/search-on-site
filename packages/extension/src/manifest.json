@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "version": "0.4.0",
   "name": "Search On Site",
-  "description": "Extension allows do search on a specific site",
+  "description": "The extension allows you to search on a specific site.",
   "icons": {
     "16": "icon128.png",
     "48": "icon128.png",
