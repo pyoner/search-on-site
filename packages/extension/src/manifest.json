@@ -1,12 +1,12 @@
 {
   "manifest_version": 3,
-  "version": "0.4.0",
+  "version": "0.4.1",
   "name": "Search On Site",
   "description": "The extension allows you to search on a specific site.",
   "icons": {
-    "16": "icon128.png",
-    "48": "icon128.png",
-    "128": "icon128.png"
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
   },
   "background": {
     "service_worker": "index.js",
@@ -14,8 +14,8 @@
   },
   "action": {
     "default_icon": {
-      "19": "icon128.png",
-      "38": "icon128.png"
+      "19": "icon.png",
+      "38": "icon.png"
     },
     "default_title": "Click to Search On Site"
   },
