@@ -67,7 +67,8 @@
 
 	<datalist id="bangs">
 		{#each getRankedBangs() as bang}
-			<option value={'!' + bang.t}>{bang.s} - {bang.sc} / {bang.c}</option>
+			{@const label = `${bang.s} - ${bang.sc} / ${bang.c}`}
+			<option {label} value={'!' + bang.t}>{label}</option>
 		{/each}
 	</datalist>
 </form>
