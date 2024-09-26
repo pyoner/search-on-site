@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import '../app.css';
+	import '../app.scss';
 
 	function theme(dark = 'dark', ligth = 'light') {
 		const m = darkThemeMatcher();
