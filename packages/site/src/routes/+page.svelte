@@ -30,8 +30,8 @@
 		search(query);
 	}
 
-	function handleKeypress(e: KeyboardEvent) {
-		const r = parseBang(query);
+	function onInput(value: string) {
+		const r = parseBang(value);
 		if (r) {
 			const [bang, q] = r;
 			const items = findBangItemsStartsWith(bang);
@@ -40,6 +40,10 @@
 	}
 
 	let query = '';
+	$: if (query.length) {
+		console.log(query);
+		onInput(query);
+	}
 </script>
 
 <div class="hero min-h-screen bg-base-200">
@@ -53,7 +57,6 @@
 					type="text"
 					use:focus
 					bind:value={query}
-					on:keypress={handleKeypress}
 				/>
 				<button class="btn btn-primary join-item" type="submit"
 					><svg
