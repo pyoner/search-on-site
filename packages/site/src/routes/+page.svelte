@@ -1,17 +1,29 @@
 <script lang="ts">
+	import { parseBang, fingBangItem, getBangURL } from '$lib/bangs';
+
 	function focus(node: HTMLInputElement) {
 		node.focus();
 	}
 
 	function search(query: string) {
-		parent.postMessage(
-			{
-				search: {
-					query
-				}
-			},
-			'*'
-		);
+		const r = parseBang(query);
+		if (r) {
+			const [bang, s] = r;
+			const item = fingBangItem(bang);
+			if (item) {
+				const url = getBangURL(item, s);
+				window.open(url);
+			}
+		} else if (parent) {
+			parent.postMessage(
+				{
+					search: {
+						query
+					}
+				},
+				'*'
+			);
+		}
 	}
 
 	function handleSearch() {
