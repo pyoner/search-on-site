@@ -67,7 +67,7 @@
 
 	<datalist id="bangs">
 		{#each getRankedBangs() as bang}
-			<option value={'!' + bang.t}>{bang.s}</option>
+			<option value={'!' + bang.t}>{bang.s} - {bang.sc} / {bang.c}</option>
 		{/each}
 	</datalist>
 </form>
