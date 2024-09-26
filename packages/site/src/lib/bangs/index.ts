@@ -1,3 +1,4 @@
+import { filter, pipe, sort, take } from 'remeda';
 import bangs from '$lib/bangs/bangs.json';
 
 export const RE_BANG = /^\s*\!(\w+)(?:\s+|$)(.*)/;
@@ -12,8 +13,13 @@ export function parseBang(s: string): [bang: string, query: string] | undefined 
 	return [bang, query];
 }
 
-export function bangItemStartsWith(bang: string) {
-	return bangs.find(({ t }) => t.startsWith(bang));
+export function findBangItemsStartsWith(bang: string, amount = 10) {
+	return pipe(
+		bangs,
+		filter(({ t }) => t.startsWith(bang)),
+		sort((a, b) => b.r - a.r),
+		take(amount)
+	);
 }
 
 export function fingBangItem(bang: string) {

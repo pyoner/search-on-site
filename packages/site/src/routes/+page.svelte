@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { parseBang, fingBangItem, getBangURL } from '$lib/bangs';
+	import { parseBang, fingBangItem, getBangURL, findBangItemsStartsWith } from '$lib/bangs';
 
 	function focus(node: HTMLInputElement) {
 		node.focus();
@@ -30,6 +30,15 @@
 		search(query);
 	}
 
+	function handleKeypress(e: KeyboardEvent) {
+		const r = parseBang(query);
+		if (r) {
+			const [bang, q] = r;
+			const items = findBangItemsStartsWith(bang);
+			console.table(items);
+		}
+	}
+
 	let query = '';
 </script>
 
@@ -44,6 +53,7 @@
 					type="text"
 					use:focus
 					bind:value={query}
+					on:keypress={handleKeypress}
 				/>
 				<button class="btn btn-primary join-item" type="submit"
 					><svg
