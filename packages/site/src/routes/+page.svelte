@@ -1,5 +1,12 @@
 <script lang="ts">
-	import { parseBang, fingBangItem, getBangURL, findBangItemsStartsWith } from '$lib/bangs';
+	import {
+		type Bang,
+		parseBang,
+		fingBangItem,
+		getBangURL,
+		findBangItemsStartsWith,
+		getRankedBangs
+	} from '$lib/bangs';
 
 	function focus(node: HTMLInputElement) {
 		node.focus();
@@ -52,8 +59,15 @@
 		type="search"
 		placeholder="Enter search query..."
 		aria-label="Search"
+		list="bangs"
 		use:focus
 		bind:value={query}
 	/>
 	<input type="submit" value="Search" />
+
+	<datalist id="bangs">
+		{#each getRankedBangs() as bang}
+			<option value={'!' + bang.t}>{bang.s}</option>
+		{/each}
+	</datalist>
 </form>
