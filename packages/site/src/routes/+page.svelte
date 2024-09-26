@@ -46,16 +46,7 @@
 	}
 </script>
 
-<h1 class="text-3xl font-bold">Search On Site</h1>
+<h1>Search On Site</h1>
 <form on:submit|preventDefault={handleSearch}>
-	<fieldset role="group">
-		<input
-			class="input w-full max-w-xs join-item form-control"
-			placeholder="Quick search..."
-			type="text"
-			use:focus
-			bind:value={query}
-		/>
-		<button type="submit">search</button>
-	</fieldset>
+	<input type="search" use:focus bind:value={query} />
 </form>
