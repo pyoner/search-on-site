@@ -47,6 +47,13 @@
 </script>
 
 <h1>Search On Site</h1>
-<form on:submit|preventDefault={handleSearch}>
-	<input type="search" use:focus bind:value={query} />
+<form role="search" on:submit|preventDefault={handleSearch}>
+	<input
+		type="search"
+		placeholder="Enter search query..."
+		aria-label="Search"
+		use:focus
+		bind:value={query}
+	/>
+	<input type="submit" value="Search" />
 </form>
