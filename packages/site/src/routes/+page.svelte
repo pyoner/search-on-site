@@ -63,7 +63,6 @@
 		use:focus
 		bind:value={query}
 	/>
-	<input type="submit" value="Search" />
 
 	<datalist id="bangs">
 		{#each getRankedBangs() as bang}
@@ -71,4 +70,6 @@
 			<option {label} value={'!' + bang.t}>{label}</option>
 		{/each}
 	</datalist>
+
+	<input type="submit" value="Search" />
 </form>
