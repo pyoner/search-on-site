@@ -20,9 +20,7 @@ chrome.runtime.onInstalled.addListener(async () => {
 chrome.omnibox.setDefaultSuggestion({ description: "Search On Site" });
 
 chrome.omnibox.onInputChanged.addListener(async (text, suggest) => {
-  console.log(text);
   const results = fuse.search(text, { limit: 10 });
-  console.log(results);
 
   const suggestions: chrome.omnibox.SuggestResult[] = results.map((result) => {
     const bang = result.item;
@@ -32,12 +30,10 @@ chrome.omnibox.onInputChanged.addListener(async (text, suggest) => {
     };
   });
 
-  console.log(suggestions);
   suggest(suggestions);
 });
 
 chrome.omnibox.onInputEntered.addListener(async (text, disposition) => {
-  console.log(text);
   const r = parseBang(text);
   if (r) {
     const [bang, s] = r;
