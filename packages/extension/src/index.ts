@@ -1,9 +1,10 @@
+import Fuse from "fuse.js";
+import xmlEscape from "xml-escape";
 import { getRankedBangs, parseBang, fingBangItem, getBangURL } from "bangs";
 import { getActiveTabURL, search } from "./helpers";
-import xmlEscape from "xml-escape";
-import Fuse from "fuse.js";
 
 const CONTEXT_MENU_ID = "son";
+const fuse = new Fuse(getRankedBangs(), { keys: ["t", "s", "sc", "c"] });
 
 // Add a listener to create the initial context menu items,
 // context menu items only need to be created at runtime.onInstalled
@@ -18,7 +19,6 @@ chrome.runtime.onInstalled.addListener(async () => {
 
 chrome.omnibox.setDefaultSuggestion({ description: "Search On Site" });
 
-const fuse = new Fuse(getRankedBangs(), { keys: ["t", "s", "sc", "c"] });
 chrome.omnibox.onInputChanged.addListener(async (text, suggest) => {
   console.log(text);
   const results = fuse.search(text, { limit: 10 });
