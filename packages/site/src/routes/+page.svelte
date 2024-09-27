@@ -54,14 +54,27 @@
 
 		<input type="submit" value="Search" />
 	</form>
-	<p>
-		This site utilizes <a href="https://duckduckgo.com/bangs" target="_blank">DuckDuckGo bangs</a>,
-		which are shortcuts that enable you to search directly on specific websites. By starting your
-		search query with an exclamation mark followed by a site code (for example,
-		<b>!w for Wikipedia</b>), you can skip DuckDuckGo and be taken straight to the search results
-		page of the desired site. This functionality improves search efficiency and provides a fast
-		method to access site-specific information.
-	</p>
+	<div>
+		<p>
+			This site utilizes <a href="https://duckduckgo.com/bangs" target="_blank">DuckDuckGo bangs</a
+			>, which are shortcuts that enable you to search directly on specific websites. By starting
+			your search query with an exclamation mark followed by a site code (for example,
+			<b>!w for Wikipedia</b>), you can skip DuckDuckGo and be taken straight to the search results
+			page of the desired site. This functionality improves search efficiency and provides a fast
+			method to access site-specific information.
+		</p>
+
+		<p>
+			If you use the <a
+				href="https://chromewebstore.google.com/detail/search-on-site/ialmbfdolfbfddhhbpcpfajahojgbglh"
+				target="_blank"
+			>
+				Search On Site
+			</a>
+			browser extension, you can type any query to search on the specific website using your default
+			browser search engine.
+		</p>
+	</div>
 </div>
 
 <style>
