@@ -33,23 +33,35 @@
 	}
 </script>
 
-<h1>Search On Site</h1>
-<form role="search" on:submit|preventDefault={handleSearch}>
-	<input
-		type="search"
-		placeholder="Enter search query..."
-		aria-label="Search"
-		list="bangs"
-		use:focus
-		bind:value={query}
-	/>
+<div class="center">
+	<h1>Search On Site</h1>
+	<form role="search" on:submit|preventDefault={handleSearch}>
+		<input
+			type="search"
+			placeholder="Enter search query..."
+			aria-label="Search"
+			list="bangs"
+			use:focus
+			bind:value={query}
+		/>
 
-	<datalist id="bangs">
-		{#each getRankedBangs() as bang}
-			{@const label = `${bang.s} - ${bang.sc} / ${bang.c}`}
-			<option {label} value={'!' + bang.t}>{label}</option>
-		{/each}
-	</datalist>
+		<datalist id="bangs">
+			{#each getRankedBangs() as bang}
+				{@const label = `${bang.s} - ${bang.sc} / ${bang.c}`}
+				<option {label} value={'!' + bang.t}>{label}</option>
+			{/each}
+		</datalist>
 
-	<input type="submit" value="Search" />
-</form>
+		<input type="submit" value="Search" />
+	</form>
+</div>
+
+<style>
+	.center {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		height: 100vh;
+	}
+</style>
