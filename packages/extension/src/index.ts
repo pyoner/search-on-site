@@ -1,4 +1,7 @@
+import { getRankedBangs } from "bangs";
 import { getActiveTabURL, search } from "./helpers";
+import xmlEscape from "xml-escape";
+import Fuse from "fuse.js";
 
 const CONTEXT_MENU_ID = "son";
 
@@ -14,6 +17,25 @@ chrome.runtime.onInstalled.addListener(async () => {
 });
 
 chrome.omnibox.setDefaultSuggestion({ description: "Search On Site" });
+
+const fuse = new Fuse(getRankedBangs(), { keys: ["t", "s", "sc", "c"] });
+chrome.omnibox.onInputChanged.addListener(async (text, suggest) => {
+  console.log(text);
+  const results = fuse.search(text, { limit: 10 });
+  console.log(results);
+
+  const suggestions: chrome.omnibox.SuggestResult[] = results.map((result) => {
+    const bang = result.item;
+    return {
+      content: `${bang.t}`,
+      description: xmlEscape(`${bang.s} - ${bang.sc} / ${bang.c}`),
+    };
+  });
+
+  console.log(suggestions);
+  suggest(suggestions);
+});
+
 chrome.omnibox.onInputEntered.addListener(async (text, disposition) => {
   const url = await getActiveTabURL();
   if (!url) {
