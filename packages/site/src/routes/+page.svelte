@@ -1,12 +1,7 @@
 <script lang="ts">
-	import {
-		type Bang,
-		parseBang,
-		fingBangItem,
-		getBangURL,
-		findBangItemsStartsWith,
-		getRankedBangs
-	} from '$lib/bangs';
+	import { type Bang, parseBang, fingBangItem, getBangURL, getRankedBangs } from '$lib/bangs';
+
+	let query = '';
 
 	function focus(node: HTMLInputElement) {
 		node.focus();
@@ -35,21 +30,6 @@
 
 	function handleSearch() {
 		search(query);
-	}
-
-	function onInput(value: string) {
-		const r = parseBang(value);
-		if (r) {
-			const [bang, q] = r;
-			const items = findBangItemsStartsWith(bang);
-			console.table(items);
-		}
-	}
-
-	let query = '';
-	$: if (query.length) {
-		console.log(query);
-		onInput(query);
 	}
 </script>
 
