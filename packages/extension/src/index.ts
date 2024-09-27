@@ -1,4 +1,4 @@
-import { getRankedBangs } from "bangs";
+import { getRankedBangs, parseBang, fingBangItem, getBangURL } from "bangs";
 import { getActiveTabURL, search } from "./helpers";
 import xmlEscape from "xml-escape";
 import Fuse from "fuse.js";
@@ -27,7 +27,7 @@ chrome.omnibox.onInputChanged.addListener(async (text, suggest) => {
   const suggestions: chrome.omnibox.SuggestResult[] = results.map((result) => {
     const bang = result.item;
     return {
-      content: `${bang.t}`,
+      content: `!${bang.t}`,
       description: xmlEscape(`${bang.s} - ${bang.sc} / ${bang.c}`),
     };
   });
@@ -37,6 +37,18 @@ chrome.omnibox.onInputChanged.addListener(async (text, suggest) => {
 });
 
 chrome.omnibox.onInputEntered.addListener(async (text, disposition) => {
+  console.log(text);
+  const r = parseBang(text);
+  if (r) {
+    const [bang, s] = r;
+    const item = fingBangItem(bang);
+    if (item) {
+      const url = getBangURL(item, s);
+      await chrome.tabs.update({ url });
+    }
+    return;
+  }
+
   const url = await getActiveTabURL();
   if (!url) {
     return;
