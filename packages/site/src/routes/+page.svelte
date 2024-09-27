@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { type Bang, parseBang, fingBangItem, getBangURL, getRankedBangs } from '$lib/bangs';
+	import { type Bang, parseBang, fingBangItem, getBangURL, getRankedBangs } from 'bangs';
 
 	let query = '';
 

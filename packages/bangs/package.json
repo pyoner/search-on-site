@@ -2,6 +2,11 @@
   "name": "bangs",
   "module": "src/index.ts",
   "type": "module",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts"
+    }
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },

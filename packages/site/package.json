@@ -36,6 +36,7 @@
 	"type": "module",
 	"dependencies": {
 		"@picocss/pico": "^2.0.6",
+		"bangs": "workspace:*",
 		"remeda": "^2.14.0"
 	}
 }
