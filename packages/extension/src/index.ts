@@ -23,7 +23,7 @@ chrome.omnibox.onInputEntered.addListener(async (text, disposition) => {
   search(
     text,
     { site: url.hostname },
-    disposition == "currentTab" ? "CURRENT_TAB" : "NEW_TAB"
+    disposition == "currentTab" ? "CURRENT_TAB" : "NEW_TAB",
   );
 });
 
@@ -51,8 +51,9 @@ chrome.action.onClicked.addListener(async () => {
   let screenHeight = 1080; //window.screen.availHeight;
 
   // Calculate the size of the popup window
-  let popupWidth = screenWidth / 3;
-  let popupHeight = screenHeight / 3;
+  const c = 2;
+  let popupWidth = screenWidth / c;
+  let popupHeight = screenHeight / c;
 
   // Calculate the position of the popup window to be centered
   let left = (screenWidth - popupWidth) / 2;
