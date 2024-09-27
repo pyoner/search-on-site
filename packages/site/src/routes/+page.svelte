@@ -55,10 +55,12 @@
 		<input type="submit" value="Search" />
 	</form>
 	<p>
-		DuckDuckGo bangs are shortcuts that help you search directly on specific websites. By prefixing
-		your search query with an exclamation mark followed by a site code (e.g., !w for Wikipedia), you
-		can bypass DuckDuckGo and go directly to the site's search results page. This feature enhances
-		search efficiency and provides a powerful way to access site-specific information quickly.
+		This site utilizes <a href="https://duckduckgo.com/bangs" target="_blank">DuckDuckGo bangs</a>,
+		which are shortcuts that enable you to search directly on specific websites. By starting your
+		search query with an exclamation mark followed by a site code (for example,
+		<b>!w for Wikipedia</b>), you can skip DuckDuckGo and be taken straight to the search results
+		page of the desired site. This functionality improves search efficiency and provides a fast
+		method to access site-specific information.
 	</p>
 </div>
 
