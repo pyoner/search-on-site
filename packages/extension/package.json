@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "bangs": "workspace:*",
+    "bangs-duckgo": "^1.1.1",
     "fuse.js": "^7.0.0",
     "typechat": "^0.0.10",
     "xml-escape": "^1.1.0"

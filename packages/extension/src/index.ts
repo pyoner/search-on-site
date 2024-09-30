@@ -1,10 +1,14 @@
 import Fuse from "fuse.js";
 import xmlEscape from "xml-escape";
-import { getRankedBangs, parseBang, fingBangItem, getBangURL } from "bangs";
+
+import bangs from "bangs-duckgo/bangs.json";
+import { rankedBangs, parseBang, bangURL } from "bangs-duckgo";
 import { getActiveTabURL, search } from "./helpers";
 
 const CONTEXT_MENU_ID = "son";
-const fuse = new Fuse(getRankedBangs(), { keys: ["t", "s", "sc", "c"] });
+const fuse = new Fuse(rankedBangs(bangs), {
+  keys: ["bang", "siteName", "subcategoty", "category"],
+});
 
 // Add a listener to create the initial context menu items,
 // context menu items only need to be created at runtime.onInstalled
@@ -25,8 +29,10 @@ chrome.omnibox.onInputChanged.addListener(async (text, suggest) => {
   const suggestions: chrome.omnibox.SuggestResult[] = results.map((result) => {
     const bang = result.item;
     return {
-      content: `!${bang.t}`,
-      description: xmlEscape(`${bang.s} - ${bang.sc} / ${bang.c}`),
+      content: `!${bang.bang}`,
+      description: xmlEscape(
+        `${bang.siteName} - ${bang.subcategory} / ${bang.category}`,
+      ),
     };
   });
 
@@ -36,10 +42,9 @@ chrome.omnibox.onInputChanged.addListener(async (text, suggest) => {
 chrome.omnibox.onInputEntered.addListener(async (text, disposition) => {
   const r = parseBang(text);
   if (r) {
-    const [bang, s] = r;
-    const item = fingBangItem(bang);
+    const item = bangs.find((b) => b.bang === r.bang);
     if (item) {
-      const url = getBangURL(item, s);
+      const url = bangURL(item, r.query);
       await chrome.tabs.update({ url });
     }
     return;
