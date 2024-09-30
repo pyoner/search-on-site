@@ -37,6 +37,7 @@
 	"dependencies": {
 		"@picocss/pico": "^2.0.6",
 		"bangs": "workspace:*",
+		"bangs-duckgo": "^1.1.0",
 		"remeda": "^2.14.0"
 	}
 }

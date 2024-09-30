@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { type Bang, parseBang, fingBangItem, getBangURL, getRankedBangs } from 'bangs';
-
+	import bangs from 'bangs-duckgo/bangs.json';
+	import { parseBang, rankedBangs, bangURL } from 'bangs-duckgo';
 	let query = '';
 
 	function focus(node: HTMLInputElement) {
@@ -10,10 +10,9 @@
 	function search(query: string) {
 		const r = parseBang(query);
 		if (r) {
-			const [bang, s] = r;
-			const item = fingBangItem(bang);
+			const item = bangs.find((b) => b.bang === r.bang);
 			if (item) {
-				const url = getBangURL(item, s);
+				const url = bangURL(item, r.query);
 				window.open(url);
 			}
 		} else if (parent) {
@@ -46,9 +45,9 @@
 		/>
 
 		<datalist id="bangs">
-			{#each getRankedBangs() as bang}
-				{@const label = `${bang.s} - ${bang.sc} / ${bang.c}`}
-				<option {label} value={'!' + bang.t}>{label}</option>
+			{#each rankedBangs(bangs) as bang}
+				{@const label = `${bang.siteName} - ${bang.subcategory} / ${bang.category}`}
+				<option {label} value={'!' + bang.bang}>{label}</option>
 			{/each}
 		</datalist>
 

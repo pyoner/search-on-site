@@ -4,5 +4,8 @@
   "name": "search-on-site",
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "bangs-duckgo": "^1.1.1"
+  }
 }
