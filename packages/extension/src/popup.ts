@@ -20,8 +20,15 @@ window.addEventListener("message", async (event) => {
   window.close();
 });
 
-setTimeout(() => {
-  chrome.windows.onFocusChanged.addListener(() => {
-    window.close();
-  });
-}, 0);
+// close inactive window
+let timer: number;
+chrome.windows.onFocusChanged.addListener(async () => {
+  const currWindow = await chrome.windows.getCurrent();
+  if (currWindow.focused) {
+    window.clearTimeout(timer);
+  } else {
+    timer = window.setTimeout(() => {
+      window.close();
+    }, 5000);
+  }
+});
