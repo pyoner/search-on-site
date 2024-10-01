@@ -31,7 +31,7 @@ chrome.omnibox.onInputChanged.addListener(async (text, suggest) => {
     return {
       content: `!${bang.bang}`,
       description: xmlEscape(
-        `${bang.siteName} - ${bang.subcategory} / ${bang.category}`,
+        `${bang.name} - ${bang.subcategory} / ${bang.category}`,
       ),
     };
   });

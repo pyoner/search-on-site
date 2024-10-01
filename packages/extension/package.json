@@ -18,7 +18,7 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "bangs-duckgo": "^1.1.1",
+    "bangs-duckgo": "^1.2.0",
     "fuse.js": "^7.0.0",
     "typechat": "^0.0.10",
     "xml-escape": "^1.1.0"
