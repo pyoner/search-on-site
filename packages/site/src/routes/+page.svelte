@@ -46,7 +46,7 @@
 
 		<datalist id="bangs">
 			{#each rankedBangs(bangs) as bang}
-				{@const label = `${bang.name} - ${bang.subcategory} / ${bang.category}`}
+				{@const label = `${bang.name} - ${bang.subcategory} / ${bang.category} (${bang.domain})`}
 				<option {label} value={'!' + bang.bang}>{label}</option>
 			{/each}
 		</datalist>
