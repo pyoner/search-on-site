@@ -1,4 +1,5 @@
 import fs from 'fs';
+import path from 'path';
 import OpenAI from 'openai';
 
 import bangs from 'bangs-duckgo/bangs.json';
@@ -11,8 +12,10 @@ type BatchOpts<T> = {
 };
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-const batchFilename = 'batch.jsonl';
-const batchResultFilename = 'result.jsonl';
+
+const dataDir = path.resolve(__dirname, 'data');
+const batchFilename = path.resolve(dataDir, 'batch.jsonl');
+const batchResultFilename = path.resolve(dataDir, 'result.jsonl');
 const batchOpts: BatchOpts<(typeof bangs)[number]> = {
 	model: 'gpt-4o',
 
