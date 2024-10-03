@@ -11,7 +11,7 @@ type BatchOpts<T> = {
 };
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-const batchFilename = 'output.jsonl';
+const batchFilename = 'batch.jsonl';
 const batchResultFilename = 'result.jsonl';
 const batchOpts: BatchOpts<(typeof bangs)[number]> = {
 	model: 'gpt-4o',
