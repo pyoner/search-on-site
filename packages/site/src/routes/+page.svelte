@@ -1,6 +1,11 @@
 <script lang="ts">
 	import bangs from 'bangs-duckgo/bangs.json';
 	import { parseBang, rankedBangs, bangURL } from 'bangs-duckgo';
+
+	const EXTENSION_ID =
+		process.env.NODE_ENV === 'development'
+			? 'ahomneldfbbdccjfeibjabldgnnfinam'
+			: 'ialmbfdolfbfddhhbpcpfajahojgbglh';
 	let query = '';
 
 	function focus(node: HTMLInputElement) {
@@ -8,6 +13,8 @@
 	}
 
 	function search(query: string) {
+		const site = new URL(document.URL).searchParams.get('site');
+		console.log(site, query);
 		const r = parseBang(query);
 		if (r) {
 			const item = bangs.find((b) => b.bang === r.bang);
@@ -15,7 +22,7 @@
 				const url = bangURL(item, r.query);
 				window.open(url);
 			}
-		} else if (parent) {
+		} else if (parent !== window) {
 			parent.postMessage(
 				{
 					search: {
@@ -24,6 +31,12 @@
 				},
 				'*'
 			);
+		} else if (site && query.length) {
+			chrome.runtime.sendMessage(EXTENSION_ID, {
+				type: 'search',
+				site,
+				query
+			});
 		}
 	}
 
@@ -46,7 +59,7 @@
 
 		<datalist id="bangs">
 			{#each rankedBangs(bangs) as bang}
-				{@const label = `${bang.siteName} - ${bang.subcategory} / ${bang.category}`}
+				{@const label = `${bang.name} - ${bang.subcategory} / ${bang.category}`}
 				<option {label} value={'!' + bang.bang}>{label}</option>
 			{/each}
 		</datalist>
