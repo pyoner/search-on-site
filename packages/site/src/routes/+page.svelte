@@ -12,9 +12,8 @@
 		node.focus();
 	}
 
-	function search(query: string) {
+	async function search(query: string) {
 		const site = new URL(document.URL).searchParams.get('site');
-		console.log(site, query);
 		const r = parseBang(query);
 		if (r) {
 			const item = bangs.find((b) => b.bang === r.bang);
@@ -32,11 +31,17 @@
 				'*'
 			);
 		} else if (site && query.length) {
-			chrome.runtime.sendMessage(EXTENSION_ID, {
-				type: 'search',
-				site,
-				query
-			});
+			try {
+				await chrome.runtime.sendMessage(EXTENSION_ID, {
+					type: 'search',
+					site,
+					query
+				});
+			} catch (e) {
+				// fallback
+				const q = encodeURIComponent(`site:${site} ${query}`);
+				window.open(`https://www.google.com/search?q=${q}`);
+			}
 		}
 	}
 
