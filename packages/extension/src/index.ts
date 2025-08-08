@@ -6,6 +6,11 @@ import { rankedBangs, parseBang, bangURL } from "bangs-duckgo";
 import { getActiveTabURL, search } from "./helpers";
 
 const CONTEXT_MENU_ID = "son";
+const DEV_ID = "ahomneldfbbdccjfeibjabldgnnfinam";
+const DEV_URL = "http://localhost:5173/";
+const SON_URL =
+  chrome.runtime.id === DEV_ID ? DEV_URL : "https://www.searchon.site/";
+
 const fuse = new Fuse(rankedBangs(bangs), {
   keys: ["bang", "siteName", "subcategoty", "category"],
 });
@@ -81,26 +86,13 @@ chrome.action.onClicked.addListener(async () => {
     return;
   }
 
-  // Get the screen's width and height
-  let screenWidth = 1920; //window.screen.availWidth;
-  let screenHeight = 1080; //window.screen.availHeight;
-
-  // Calculate the size of the popup window
-  const c = 2;
-  let popupWidth = screenWidth / c;
-  let popupHeight = screenHeight / c;
-
-  // Calculate the position of the popup window to be centered
-  let left = (screenWidth - popupWidth) / 2;
-  let top = (screenHeight - popupHeight) / 2;
-
-  // Create the popup window
-  await chrome.windows.create({
-    url: `popup.html?site=${url?.hostname}`,
-    type: "popup",
-    left: Math.round(left),
-    top: Math.round(top),
-    width: Math.round(popupWidth),
-    height: Math.round(popupHeight),
+  await chrome.tabs.create({
+    url: `${SON_URL}?site=${url?.hostname}`,
   });
+});
+
+chrome.runtime.onMessageExternal.addListener((request, sender) => {
+  if (request.type === "search" && request.query) {
+    search(request.query, { site: request.site });
+  }
 });

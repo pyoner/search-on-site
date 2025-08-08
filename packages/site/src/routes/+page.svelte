@@ -1,13 +1,19 @@
 <script lang="ts">
 	import bangs from 'bangs-duckgo/bangs.json';
 	import { parseBang, rankedBangs, bangURL } from 'bangs-duckgo';
+
+	const EXTENSION_ID =
+		process.env.NODE_ENV === 'development'
+			? 'ahomneldfbbdccjfeibjabldgnnfinam'
+			: 'ialmbfdolfbfddhhbpcpfajahojgbglh';
 	let query = '';
 
 	function focus(node: HTMLInputElement) {
 		node.focus();
 	}
 
-	function search(query: string) {
+	async function search(query: string) {
+		const site = new URL(document.URL).searchParams.get('site');
 		const r = parseBang(query);
 		if (r) {
 			const item = bangs.find((b) => b.bang === r.bang);
@@ -15,7 +21,7 @@
 				const url = bangURL(item, r.query);
 				window.open(url);
 			}
-		} else if (parent) {
+		} else if (parent !== window) {
 			parent.postMessage(
 				{
 					search: {
@@ -24,6 +30,18 @@
 				},
 				'*'
 			);
+		} else if (site && query.length) {
+			try {
+				await chrome.runtime.sendMessage(EXTENSION_ID, {
+					type: 'search',
+					site,
+					query
+				});
+			} catch (e) {
+				// fallback
+				const q = encodeURIComponent(`site:${site} ${query}`);
+				window.open(`https://www.google.com/search?q=${q}`);
+			}
 		}
 	}
 
