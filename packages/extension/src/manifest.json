@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "version": "0.5.0",
+  "version": "0.5.1",
   "name": "Search On Site",
   "description": "The extension allows you to search on a specific site.",
   "icons": {
@@ -29,5 +29,8 @@
         "default": "Alt+K"
       }
     }
+  },
+  "externally_connectable": {
+    "matches": ["*://*.searchon.site/*", "*://localhost/*"]
   }
 }
