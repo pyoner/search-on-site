@@ -19,7 +19,7 @@
 			const item = bangs.find((b) => b.bang === r.bang);
 			if (item) {
 				const url = bangURL(item, r.query);
-				window.open(url);
+				window.open(url, '_self');
 			}
 		} else if (parent !== window) {
 			parent.postMessage(
@@ -40,7 +40,7 @@
 			} catch (e) {
 				// fallback
 				const q = encodeURIComponent(`site:${site} ${query}`);
-				window.open(`https://www.google.com/search?q=${q}`);
+				window.open(`https://www.google.com/search?q=${q}`, '_self');
 			}
 		}
 	}
